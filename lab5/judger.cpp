@@ -1,7 +1,5 @@
 #include"judger.h"
 
-Judger judger;
-
 string Judger::getfn(string fp)
 {
     int backslashpos = fp.find('/');
@@ -67,12 +65,12 @@ void Judger::GetFolderNames(std::string path, std::vector<std::string> &filename
     closedir(pDir);
 }
 
-int main()
+void Judger::judger_main()
 {
     vector<string> foldernames;
     vector<string> filenames;
     string format;
-    judger.GetFolderNames(judger.rootfolder, foldernames);
+    GetFolderNames(this->rootfolder, foldernames);
     string folder;
     std::system("mkdir output");
     ofstream ofs1("output/equal.csv", ios::out);
@@ -86,11 +84,11 @@ int main()
     for(int i = 0; i != foldernames.size(); ++i)
     {
         folder = foldernames[i];
-        judger.GetFileNames(folder, filenames);
+        GetFileNames(folder, filenames);
         format = folder + "/stdin_format.txt";
         for(int i = 0; i < filenames.size(); ++i)
         {
-            judger.geneexec(filenames[i]);
+            geneexec(filenames[i]);
         }
         for(int i = 0; i < filenames.size() - 1; ++i)
         {
@@ -99,11 +97,11 @@ int main()
                 bool flag = 1;
                 for(int k = 0; k != testtimes; ++k)
                 {
-                    judger.generatecase(format, "testcases.txt", k);
-                    judger.casetest(filenames[i], filenames[j], "testcases.txt",
+                    generatecase(format, "testcases.txt", k);
+                    casetest(filenames[i], filenames[j], "testcases.txt",
                     "out1.txt", "out2.txt");
-                    string str1 = judger.ftos("out1.txt");
-                    string str2 = judger.ftos("out2.txt");
+                    string str1 = ftos("out1.txt");
+                    string str2 = ftos("out2.txt");
                     if(str1.compare(str2) != 0)
                         flag = 0;
                 }
@@ -119,7 +117,7 @@ int main()
         }
         for(int i = 0; i != filenames.size(); ++i)
         {
-            judger.rmexec(filenames[i]);
+            rmexec(filenames[i]);
         }
         filenames.clear();//important
     }
@@ -128,6 +126,4 @@ int main()
     std::system("rm out1.txt");
     std::system("rm out2.txt");
     std::system("rm testcases.txt");
-
-    return 0;
 }

@@ -21,9 +21,10 @@ public:
     string rootfolder;
 
 
-    Judger(){rootfolder = "input";};
+    Judger(){rootfolder = "../lab5/input";};
     string getfn(string fp);
     string ftos(string fp);
+    void judger_main();
     void rmexec(string fp);
     void GetFileNames(std::string path, std::vector<std::string> &filenames);
     void GetFolderNames(std::string path, std::vector<std::string> &filenames);

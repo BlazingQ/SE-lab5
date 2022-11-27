@@ -22,7 +22,13 @@
 
 ![image-20221127142617464](image-20221127142617464.png)
 
-先学了会QT，写了点demo。但是我.gitignore写完了，即是加进去了还是tracked了：
+先学了会QT，写了点demo。但是我.gitignore写晚了，即是加进去了还是tracked了：
 
 ![image-20221127204203674](image-20221127204203674.png)
+
+创建新的QT项目lab5，之后将lab4的代码文件移动到该文件夹下，git status查看：
+
+![image-20221127212556936](image-20221127212556936.png)
+
+可以注意到被移动的文件会同时被跟踪为new file和deleted，同时新建的和lab5相关的qt文件都是untracked。
 
