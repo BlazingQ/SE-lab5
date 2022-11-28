@@ -1,7 +1,11 @@
 #ifndef MYMAINWINDOW_H
 #define MYMAINWINDOW_H
 
+#include "judger.h"
 #include <QMainWindow>
+#include<QLabel>
+#include<QString>
+#include<QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class myMainWindow; }
@@ -14,6 +18,8 @@ class myMainWindow : public QMainWindow
 public:
     myMainWindow(QWidget *parent = nullptr);
     ~myMainWindow();
+    void changelabel(QLabel* label, QString str);
+    void gothrough();
 
 private:
     Ui::myMainWindow *ui;

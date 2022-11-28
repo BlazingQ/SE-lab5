@@ -364,6 +364,7 @@ compiler_moc_header_make_all: moc_mymainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mymainwindow.cpp
 moc_mymainwindow.cpp: ../lab5/mymainwindow.h \
+		../lab5/judger.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/passenger/SE-lab5/SE-lab5/build-lab5-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/passenger/SE-lab5/SE-lab5/lab5 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../lab5/mymainwindow.h -o moc_mymainwindow.cpp
@@ -400,6 +401,7 @@ main.o: ../lab5/main.cpp ../lab5/mymainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../lab5/main.cpp
 
 mymainwindow.o: ../lab5/mymainwindow.cpp ../lab5/mymainwindow.h \
+		../lab5/judger.h \
 		ui_mymainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mymainwindow.o ../lab5/mymainwindow.cpp
 

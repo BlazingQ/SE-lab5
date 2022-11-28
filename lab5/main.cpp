@@ -1,5 +1,4 @@
 #include "mymainwindow.h"
-#include "judger.h"
 
 #include <QApplication>
 

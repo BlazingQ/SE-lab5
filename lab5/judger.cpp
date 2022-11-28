@@ -73,14 +73,14 @@ void Judger::judger_main()
     GetFolderNames(this->rootfolder, foldernames);
     string folder;
     std::system("mkdir output");
-    ofstream ofs1("output/equal.csv", ios::out);
+    ofstream ofs1("../lab5/output/equal.csv", ios::out);
     ofs1<<"file1,file2\n";
-    ofstream ofs2("output/inequal.csv", ios::out);
+    ofstream ofs2("../lab5/output/inequal.csv", ios::out);
     ofs2<<"file1,file2\n";
     ofs1.close();
     ofs2.close();
-    ofs1.open("output/equal.csv", ios::app);
-    ofs2.open("output/inequal.csv", ios::app);
+    ofs1.open("../lab5/output/equal.csv", ios::app);
+    ofs2.open("../lab5/output/inequal.csv", ios::app);
     for(int i = 0; i != foldernames.size(); ++i)
     {
         folder = foldernames[i];
