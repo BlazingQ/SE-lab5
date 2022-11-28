@@ -6,6 +6,7 @@
 #include<QLabel>
 #include<QString>
 #include<QVector>
+#include<QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class myMainWindow; }
@@ -18,8 +19,14 @@ class myMainWindow : public QMainWindow
 public:
     myMainWindow(QWidget *parent = nullptr);
     ~myMainWindow();
-    void changelabel(QLabel* label, QString str);
     void gothrough();
+    void getnext();
+    void writeback();
+
+private slots:
+    void on_btnsame_clicked();
+
+    void on_btndiff_clicked();
 
 private:
     Ui::myMainWindow *ui;

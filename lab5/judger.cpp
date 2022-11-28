@@ -1,8 +1,9 @@
 #include"judger.h"
+#include<QDebug>
 
 string Judger::getfn(string fp)
 {
-    int backslashpos = fp.find('/');
+    int backslashpos = fp.find_last_of('/');
     return fp.substr(backslashpos + 1, fp.size());
 }
 
@@ -18,8 +19,11 @@ string Judger::ftos(string fp)
     string tmp;
     while(!ifs.eof())
     {
-        ifs>>tmp;
-        res += tmp;
+        //qDebug()<<"flag1\n";
+        getline(ifs, tmp);
+        //qDebug()<<"flag2\n";
+        res = res + tmp + "\n";
+        //qDebug()<<"flag3\n";
     }
     ifs.close();
     return res;
@@ -72,7 +76,7 @@ void Judger::judger_main()
     string format;
     GetFolderNames(this->rootfolder, foldernames);
     string folder;
-    std::system("mkdir output");
+    std::system("mkdir ../lab5/output");
     ofstream ofs1("../lab5/output/equal.csv", ios::out);
     ofs1<<"file1,file2\n";
     ofstream ofs2("../lab5/output/inequal.csv", ios::out);
