@@ -18,9 +18,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,16 +34,14 @@ public:
     QLabel *label;
     QLabel *label_2;
     QHBoxLayout *horizontalLayout;
-    QTextEdit *textEdit;
-    QTextEdit *textEdit_2;
+    QTextEdit *textEdit1;
+    QTextEdit *textEdit2;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *compare;
     QPushButton *btnsame;
     QPushButton *btndiff;
     QMenuBar *menubar;
     QMenu *menumain_win;
-    QStatusBar *statusbar;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *myMainWindow)
     {
@@ -61,10 +57,11 @@ public:
         centralwidget->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(60, 40, 661, 451));
+        layoutWidget->setGeometry(QRect(0, 0, 801, 581));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -83,15 +80,15 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        textEdit = new QTextEdit(layoutWidget);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit1 = new QTextEdit(layoutWidget);
+        textEdit1->setObjectName(QString::fromUtf8("textEdit1"));
 
-        horizontalLayout->addWidget(textEdit);
+        horizontalLayout->addWidget(textEdit1);
 
-        textEdit_2 = new QTextEdit(layoutWidget);
-        textEdit_2->setObjectName(QString::fromUtf8("textEdit_2"));
+        textEdit2 = new QTextEdit(layoutWidget);
+        textEdit2->setObjectName(QString::fromUtf8("textEdit2"));
 
-        horizontalLayout->addWidget(textEdit_2);
+        horizontalLayout->addWidget(textEdit2);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -123,12 +120,6 @@ public:
         menumain_win = new QMenu(menubar);
         menumain_win->setObjectName(QString::fromUtf8("menumain_win"));
         myMainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(myMainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        myMainWindow->setStatusBar(statusbar);
-        toolBar = new QToolBar(myMainWindow);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        myMainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menumain_win->menuAction());
 
@@ -146,7 +137,6 @@ public:
         btnsame->setText(QApplication::translate("myMainWindow", "same", nullptr));
         btndiff->setText(QApplication::translate("myMainWindow", "different", nullptr));
         menumain_win->setTitle(QApplication::translate("myMainWindow", "main win", nullptr));
-        toolBar->setWindowTitle(QApplication::translate("myMainWindow", "toolBar", nullptr));
     } // retranslateUi
 
 };

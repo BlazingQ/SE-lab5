@@ -35,8 +35,8 @@ void myMainWindow::getnext()
         ui->label_2->setText(QString::fromStdString(file2));
         filetext1 = tmpjudger.ftos(file1);
         filetext2 = tmpjudger.ftos(file2);
-        ui->textEdit->setText(QString::fromStdString(filetext1));
-        ui->textEdit_2->setText(QString::fromStdString(filetext2));
+        ui->textEdit1->setText(QString::fromStdString(filetext1));
+        ui->textEdit2->setText(QString::fromStdString(filetext2));
     }
     else
     {
@@ -44,8 +44,8 @@ void myMainWindow::getnext()
         writeback();
         ui->label->setText("");
         ui->label_2->setText("");
-        ui->textEdit->setText("");
-        ui->textEdit_2->setText("");
+        ui->textEdit1->setText("");
+        ui->textEdit2->setText("");
     }
 }
 
@@ -112,4 +112,110 @@ void myMainWindow::on_btndiff_clicked()
     if(file1.compare("") != 0)
         inequalpairs.push_back(file1+","+file2);
     getnext();
+}
+
+void myMainWindow::on_compare_clicked()
+{
+    //Taking strings from text boxes.
+    QByteArray text1 = (ui->textEdit1->toPlainText()).toUtf8();
+    QByteArray text2 = (ui->textEdit2->toPlainText()).toUtf8();
+
+    if(text1 == "" || text2 == "")
+    {
+        QMessageBox::information(this," "," Enter two strings");
+        return;
+    }
+    QList<int> differenceList;
+
+
+   int larger = 0;
+   bool oneIsBig = false;
+   bool twoIsBig = false;
+    if(text1.length() > text2.length())
+    {
+        twoIsBig = false;
+        oneIsBig = true;
+        larger = text1.length();
+    }
+
+    if(text1.length() < text2.length())
+    {
+        twoIsBig = true;
+        oneIsBig = false;
+        larger = text2.length();
+    }
+
+    if(text1.length() == text2.length())
+    {
+        twoIsBig = false;
+        oneIsBig = false;
+        larger = text1.length();
+    }
+
+
+    //Filling rest of smaller array with ' '.
+    if(oneIsBig == true)
+    {
+        for(int i = text2.length(); i < text1.length();i++)
+        {
+            text2.append(' ');
+        }
+    }
+    if(twoIsBig == true)
+    {
+        for(int i = text1.length(); i < text2.length();i++)
+        {
+            text1.append(' ');
+        }
+    }
+
+    ui->textEdit1->setText(text1);
+    ui->textEdit2->setText(text2);
+
+    //Finding position indeces of difference between strings.
+    for(int i = 0; i < larger; i++)
+    {
+        if(text1[i] != text2[i])
+        {
+            differenceList.append(i);
+        }
+    }
+
+    QTextCursor cursorText1(ui->textEdit1->document());
+    QTextCursor cursorText2(ui->textEdit2->document());
+    QColor color1, color2;
+    color1.setRgb(153,255,255);
+    color2.setRgb(255,255,153);
+    m_txtBox1Color = color1;
+    m_txtBox2Color = color2;
+
+    QTextCharFormat backgroundClear, background1, background2;
+    backgroundClear.clearBackground();
+    background1.setBackground(m_txtBox1Color);
+    background2.setBackground(m_txtBox2Color);
+
+
+
+    //Text Edit reset.
+    cursorText1.setPosition(QTextCursor::Start,QTextCursor::MoveAnchor);
+    cursorText1.setPosition(QTextCursor::End,QTextCursor::KeepAnchor);
+    cursorText1.setCharFormat(backgroundClear);
+    cursorText2.setPosition(QTextCursor::Start,QTextCursor::MoveAnchor);
+    cursorText2.setPosition(QTextCursor::End,QTextCursor::KeepAnchor);
+    cursorText2.setCharFormat(backgroundClear);
+
+
+
+
+    //Highlighting the difference.
+    for(int i = 0;i < differenceList.size();i++)
+    {
+        cursorText1.setPosition(differenceList[i],QTextCursor::MoveAnchor);
+        cursorText1.setPosition(differenceList[i] + 1,QTextCursor::KeepAnchor);
+        cursorText1.setCharFormat(background1);
+
+        cursorText2.setPosition(differenceList[i],QTextCursor::MoveAnchor);
+        cursorText2.setPosition(differenceList[i] + 1,QTextCursor::KeepAnchor);
+        cursorText2.setCharFormat(background2);
+    }
 }

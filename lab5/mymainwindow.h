@@ -5,7 +5,6 @@
 #include <QMainWindow>
 #include<QLabel>
 #include<QString>
-#include<QVector>
 #include<QMessageBox>
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +27,10 @@ private slots:
 
     void on_btndiff_clicked();
 
+    void on_compare_clicked();
+
 private:
     Ui::myMainWindow *ui;
+    QColor m_txtBox1Color, m_txtBox2Color;
 };
 #endif // MYMAINWINDOW_H
