@@ -1,9 +1,5 @@
 #include "mymainwindow.h"
 #include "ui_mymainwindow.h"
-vector<string> filepairs;
-vector<string> equalpairs;
-vector<string> inequalpairs;
-Judger tmpjudger;
 
 myMainWindow::myMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -64,7 +60,7 @@ void myMainWindow::gothrough()
         if(temp != "file1,file2")
             filepairs.push_back(temp);
     }
-    filepairs.pop_back();
+    filepairs.pop_back();//get last line two times
     getnext();
 }
 
@@ -116,21 +112,12 @@ void myMainWindow::on_btndiff_clicked()
 
 void myMainWindow::on_compare_clicked()
 {
-    //Taking strings from text boxes.
     QByteArray text1 = (ui->textEdit1->toPlainText()).toUtf8();
     QByteArray text2 = (ui->textEdit2->toPlainText()).toUtf8();
-
-    if(text1 == "" || text2 == "")
-    {
-        QMessageBox::information(this," "," Enter two strings");
-        return;
-    }
     QList<int> differenceList;
-
-
-   int larger = 0;
-   bool oneIsBig = false;
-   bool twoIsBig = false;
+    int larger = 0;
+    bool oneIsBig = false;
+    bool twoIsBig = false;
     if(text1.length() > text2.length())
     {
         twoIsBig = false;
@@ -152,8 +139,6 @@ void myMainWindow::on_compare_clicked()
         larger = text1.length();
     }
 
-
-    //Filling rest of smaller array with ' '.
     if(oneIsBig == true)
     {
         for(int i = text2.length(); i < text1.length();i++)
@@ -172,7 +157,6 @@ void myMainWindow::on_compare_clicked()
     ui->textEdit1->setText(text1);
     ui->textEdit2->setText(text2);
 
-    //Finding position indeces of difference between strings.
     for(int i = 0; i < larger; i++)
     {
         if(text1[i] != text2[i])
@@ -183,20 +167,14 @@ void myMainWindow::on_compare_clicked()
 
     QTextCursor cursorText1(ui->textEdit1->document());
     QTextCursor cursorText2(ui->textEdit2->document());
-    QColor color1, color2;
-    color1.setRgb(153,255,255);
-    color2.setRgb(255,255,153);
-    m_txtBox1Color = color1;
-    m_txtBox2Color = color2;
+    m_txtBox1Color.setRgb(153,255,255);
+    m_txtBox2Color.setRgb(255,255,153);
 
     QTextCharFormat backgroundClear, background1, background2;
     backgroundClear.clearBackground();
     background1.setBackground(m_txtBox1Color);
     background2.setBackground(m_txtBox2Color);
 
-
-
-    //Text Edit reset.
     cursorText1.setPosition(QTextCursor::Start,QTextCursor::MoveAnchor);
     cursorText1.setPosition(QTextCursor::End,QTextCursor::KeepAnchor);
     cursorText1.setCharFormat(backgroundClear);
@@ -204,10 +182,6 @@ void myMainWindow::on_compare_clicked()
     cursorText2.setPosition(QTextCursor::End,QTextCursor::KeepAnchor);
     cursorText2.setCharFormat(backgroundClear);
 
-
-
-
-    //Highlighting the difference.
     for(int i = 0;i < differenceList.size();i++)
     {
         cursorText1.setPosition(differenceList[i],QTextCursor::MoveAnchor);

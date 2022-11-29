@@ -32,5 +32,9 @@ private slots:
 private:
     Ui::myMainWindow *ui;
     QColor m_txtBox1Color, m_txtBox2Color;
+    vector<string> filepairs;
+    vector<string> equalpairs;
+    vector<string> inequalpairs;
+    Judger tmpjudger;
 };
 #endif // MYMAINWINDOW_H
