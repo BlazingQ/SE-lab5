@@ -60,7 +60,21 @@ void myMainWindow::gothrough()
         if(temp != "file1,file2")
             filepairs.push_back(temp);
     }
+    ifs.close();
+    ifs.open("../lab5/output/inequal.csv", ios::in);
+    if(!ifs) 
+    {
+        cout<<"ERROR OPEN ../lab5/output/inequal.csv\n";
+        return;
+    }
+    while(!ifs.eof())
+    {
+        ifs>>temp;
+        if(temp != "file1,file2")
+            inequalpairs.push_back(temp);
+    }
     filepairs.pop_back();//get last line two times
+    inequalpairs.pop_back();
     getnext();
 }
 

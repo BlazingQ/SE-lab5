@@ -44,6 +44,8 @@ private slots:
 
 遍历.csv文件，将文件内容存到vector中，便于之后读取。同时显示第一个需要比对的文件。
 
+对于equal.csv，将文件对读出来放进filepairs vector，用于之后人工判断。而inequal.csv则直接放入inequalpairs，等待最后被写入。
+
 ```c++
 void myMainWindow::gothrough()
 {
@@ -270,6 +272,40 @@ void myMainWindow::on_compare_clicked()
 中间是textedit，显示cpp文件的代码
 
 最下面是三个按钮，compare是对文本框中的内容进行比较，same和different是用户的判断结果，调用的slot在前面说明了。
+
+---
+
+## 程序DEMO
+
+lab4运行后的equal和inequal文件对：
+
+<img src="image-20221129124917375.png" alt="image-20221129124917375" style="zoom:67%;" />
+
+<img src="image-20221129124941404.png" alt="image-20221129124941404" style="zoom: 67%;" />
+
+inequal只截取了一部分。
+
+初始的ui界面：
+
+![image-20221129125055256](image-20221129125055256.png)
+
+下面我选取前15个same，后14个diff，最后看看output。
+
+全人工判断结束后会有弹窗通知：
+
+![image-20221129125223863](image-20221129125223863.png)
+
+点击之后屏幕清空：
+
+![image-20221129125251390](image-20221129125251390.png)
+
+最终的output：
+
+<img src="image-20221129125332659.png" alt="image-20221129125332659" style="zoom:67%;" />
+
+<img src="image-20221129125317780.png" alt="image-20221129125317780" style="zoom:67%;" />
+
+可见最终判断结果的改动被存储了。
 
 ## GIT部分
 
